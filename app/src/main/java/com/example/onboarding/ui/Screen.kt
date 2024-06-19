@@ -258,15 +258,15 @@ fun Screen(
         Column(
             modifier = Modifier
                 .constrainAs(navigationColumn) {
-                    bottom.linkTo(parent.bottom, margin = 16.dp)
-                    start.linkTo(parent.start, margin = 24.dp)
+                    bottom.linkTo(parent.bottom)
+                    start.linkTo(parent.start)
                 }
         ) {
             Image(
-                painter =painterResource(id = navigationBarId),
+                painter = painterResource(id = navigationBarId),
                 contentDescription = "navigation",
                 modifier = Modifier
-                    .padding(top = 16.dp)
+                    .padding(top = 16.dp, start = 24.dp)
                     .size(64.dp)
             )
             Text(
@@ -276,7 +276,7 @@ fun Screen(
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.Thin,
                 modifier = Modifier
-                    .padding(horizontal = 24.dp)
+                    .padding(start = 24.dp, bottom = 32.dp)
                     .clickable {
                         moveToLastScreen()
                     }
@@ -287,7 +287,7 @@ fun Screen(
             painter = painterResource(id = buttonId),
             contentDescription = "button",
             modifier = Modifier
-                .padding(top = 32.dp, end = 24.dp)
+                .padding(top = 32.dp, end = 24.dp, bottom = 16.dp)
                 .size(72.dp)
                 .clickable {
                     moveToNextActivity()

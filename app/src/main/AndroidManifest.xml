@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Onboarding"
         tools:targetApi="31">
         <activity
-            android:name=".FirstScreenActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Onboarding">
@@ -23,22 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SecondScreenActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Onboarding"/>
-        <activity
-            android:name=".ThirdScreenActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Onboarding"/>
-        <activity
-            android:name=".FourthScreenActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Onboarding"/>
-        <activity
-            android:name=".LastScreenActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Onboarding"/>
     </application>
 
 </manifest>

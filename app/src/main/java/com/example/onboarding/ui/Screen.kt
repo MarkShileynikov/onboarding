@@ -1,6 +1,5 @@
 package com.example.onboarding.ui
 
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,7 +25,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -44,7 +42,8 @@ fun Screen(
     navigationBarId: Int,
     buttonId: Int,
     moveToNextActivity: () -> Unit,
-    moveToLastScreen: () -> Unit
+    moveToLastScreen: () -> Unit,
+    moveToPreviousActivity: () -> Unit
 ) {
     var offsetX by remember { mutableStateOf(0f) }
     var isTransitionTriggered by remember { mutableStateOf(false) }
@@ -67,6 +66,9 @@ fun Screen(
                         if (offsetX < -swipeThreshold.value) {
                             isTransitionTriggered = true
                             moveToNextActivity()
+                        } else if (offsetX > swipeThreshold.value) {
+                            isTransitionTriggered = true
+                            moveToPreviousActivity()
                         }
                     }
                 }
@@ -78,7 +80,7 @@ fun Screen(
             text = stringResource(id = headerTextId),
             fontFamily = FontFamily.Monospace,
             modifier = Modifier
-                .padding(top = 83.dp, start = 24.dp, end = 24.dp, bottom = 16.dp)
+                .padding(top = 64.dp, start = 24.dp, end = 24.dp, bottom = 16.dp)
         )
         Text(
             color = Color.White,

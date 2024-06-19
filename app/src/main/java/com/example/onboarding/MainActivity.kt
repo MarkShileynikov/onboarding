@@ -9,14 +9,21 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -34,7 +41,6 @@ import com.example.onboarding.ui.theme.thirdScreenColor
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
             NavHost(
@@ -74,7 +80,7 @@ class MainActivity : ComponentActivity() {
                     FourthScreen(navController = navController)
                 }
                 composable("screen_5") {
-                    LastScreen()
+                    LastScreen(navController = navController)
                 }
             }
         }
@@ -94,6 +100,9 @@ class MainActivity : ComponentActivity() {
             },
             moveToLastScreen = {
                 navController.navigate("screen_5")
+            },
+            moveToPreviousActivity = {
+                navController.popBackStack()
             }
         )
     }
@@ -112,6 +121,9 @@ class MainActivity : ComponentActivity() {
             },
             moveToLastScreen = {
                 navController.navigate("screen_5")
+            },
+            moveToPreviousActivity = {
+                navController.popBackStack()
             }
         )
     }
@@ -130,6 +142,9 @@ class MainActivity : ComponentActivity() {
             },
             moveToLastScreen = {
                 navController.navigate("screen_5")
+            },
+            moveToPreviousActivity = {
+                navController.popBackStack()
             }
         )
     }
@@ -148,17 +163,38 @@ class MainActivity : ComponentActivity() {
             },
             moveToLastScreen = {
                 navController.navigate("screen_5")
+            },
+            moveToPreviousActivity = {
+                navController.popBackStack()
             }
         )
     }
 
     @Composable
-    fun LastScreen() {
+    fun LastScreen(navController: NavHostController) {
+        var offsetX by remember { mutableStateOf(0f) }
+        var isTransitionTriggered by remember { mutableStateOf(false) }
+
+        val configuration = LocalConfiguration.current
+        val screenWidth = configuration.screenWidthDp.dp
+        val swipeThreshold = screenWidth * 0.6f
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(fourthScreenColor)
                 .padding(24.dp)
+                .pointerInput(Unit) {
+                    detectHorizontalDragGestures { change, dragAmount ->
+                        if (!isTransitionTriggered) {
+                            change.consume()
+                            offsetX += dragAmount
+                            if (offsetX > swipeThreshold.value) {
+                                isTransitionTriggered = true
+                                navController.popBackStack()
+                            }
+                        }
+                    }
+                }
         ) {
             Text(
                 text = stringResource(id = R.string.last_screen_header),

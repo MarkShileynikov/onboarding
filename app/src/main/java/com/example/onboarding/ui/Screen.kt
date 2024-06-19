@@ -147,6 +147,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -169,6 +170,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.example.onboarding.R
 
 @Composable
@@ -244,14 +246,16 @@ fun Screen(
         Image(
             painter = painterResource(id = imageId),
             contentDescription = "image",
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(top = 32.dp)
                 .constrainAs(image) {
+                    width = Dimension.fillToConstraints
+                    height = Dimension.fillToConstraints
                     top.linkTo(text.bottom)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
+                    bottom.linkTo(button.top)
                 }
         )
 

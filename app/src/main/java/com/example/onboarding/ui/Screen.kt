@@ -1,5 +1,6 @@
 package com.example.onboarding.ui
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -57,7 +58,7 @@ fun Screen(
                     if (!isTransitionTriggered) {
                         change.consume()
                         offsetX += dragAmount
-
+                        Log.d("offset", offsetX.toString())
                         if (offsetX < -swipeThreshold.value) {
                             isTransitionTriggered = true
                             moveToNextActivity()
@@ -87,7 +88,7 @@ fun Screen(
 
         Text(
             color = Color.White,
-            fontSize = 20.sp,
+            fontSize = 16.sp,
             text = stringResource(id = textId),
             fontFamily = FontFamily.Default,
             modifier = Modifier
@@ -95,7 +96,6 @@ fun Screen(
                 .constrainAs(text) {
                     top.linkTo(header.bottom)
                     start.linkTo(parent.start)
-                    end.linkTo(parent.end)
                 }
         )
 
@@ -135,7 +135,7 @@ fun Screen(
             )
             Text(
                 color = Color.White,
-                fontSize = 24.sp,
+                fontSize = 16.sp,
                 text = stringResource(id = R.string.skip),
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.Thin,

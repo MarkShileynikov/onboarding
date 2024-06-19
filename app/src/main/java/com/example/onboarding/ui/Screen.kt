@@ -61,7 +61,7 @@ fun Screen(
                         if (offsetX < -swipeThreshold.value) {
                             isTransitionTriggered = true
                             moveToNextActivity()
-                        } else if (offsetX > swipeThreshold.value) {
+                        } else if (offsetX > swipeThreshold.value && imageId != R.drawable.img_car1) {
                             isTransitionTriggered = true
                             moveToPreviousActivity()
                         }

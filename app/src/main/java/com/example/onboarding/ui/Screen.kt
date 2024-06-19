@@ -46,9 +46,8 @@ fun Screen(
     moveToNextActivity: () -> Unit,
     moveToLastScreen: () -> Unit
 ) {
-    val context = LocalContext.current
     var offsetX by remember { mutableStateOf(0f) }
-    var isTransitionTriggered by remember { mutableStateOf(false) } // Флаг для отслеживания начала перехода
+    var isTransitionTriggered by remember { mutableStateOf(false) }
 
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp

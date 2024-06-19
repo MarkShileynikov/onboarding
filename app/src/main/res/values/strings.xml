@@ -2,5 +2,13 @@
     <string name="app_name">Onboarding</string>
     <string name="first_screen_header">Your first car without a drivers license</string>
     <string name="first_screen_text">Goes to meet people who just got their license</string>
+    <string name="second_screen_header">Always there: more than 1000 cars in Tbilisi</string>
+    <string name="second_screen_text">Our company is a leader by the number of cars in the fleet</string>
+    <string name="third_screen_header">Do not pay for parking, maintenance and gasoline</string>
+    <string name="third_screen_text">We will pay for you, all expenses related to the car</string>
+    <string name="fourth_screen_header">29 car models: from Skoda Octavia to Porsche 911</string>
+    <string name="fourth_screen_text">Choose between regular car models or exclusive ones</string>
     <string name="skip">Skip</string>
+    <string name="last_screen_header">You are a clever person!</string>>
+
 </resources>

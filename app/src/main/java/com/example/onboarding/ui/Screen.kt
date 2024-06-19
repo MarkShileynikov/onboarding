@@ -1,7 +1,9 @@
 package com.example.onboarding.ui
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,16 +19,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
+import com.example.onboarding.LastScreenActivity
 import com.example.onboarding.R
 
 @Composable
-fun Screen(backgroundColor: Color, headerTextId: Int, textId: Int, imageId: Int, navigationBarId: Int, buttonId: Int) {
+fun Screen(
+    backgroundColor: Color,
+    headerTextId: Int,
+    textId: Int,
+    imageId: Int,
+    navigationBarId: Int,
+    buttonId: Int,
+    moveToNextActivity: () -> Unit)
+
+{
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -67,7 +83,7 @@ fun Screen(backgroundColor: Color, headerTextId: Int, textId: Int, imageId: Int,
             Column {
                 Image(
                     painter = painterResource(id = navigationBarId),
-                    contentDescription = "image",
+                    contentDescription = "navigation",
                     modifier = Modifier
                         .padding(start = 24.dp, top = 16.dp)
                         .size(64.dp)
@@ -80,14 +96,20 @@ fun Screen(backgroundColor: Color, headerTextId: Int, textId: Int, imageId: Int,
                     fontWeight = FontWeight.Thin,
                     modifier = Modifier
                         .padding(horizontal = 24.dp)
+                        .clickable {
+                            context.startActivity(Intent(context, LastScreenActivity::class.java))
+                        }
                 )
             }
             Image(
                 painter = painterResource(id = buttonId),
-                contentDescription = "image",
+                contentDescription = "button",
                 modifier = Modifier
                     .padding(top = 32.dp, end = 24.dp)
                     .size(72.dp)
+                    .clickable {
+                        moveToNextActivity()
+                    }
             )
         }
     }

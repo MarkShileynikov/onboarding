@@ -217,7 +217,7 @@ fun Screen(
 
         Text(
             color = Color.White,
-            fontSize = 24.sp,
+            fontSize = 20.sp,
             text = stringResource(id = headerTextId),
             fontFamily = FontFamily.Monospace,
             modifier = Modifier
@@ -231,7 +231,7 @@ fun Screen(
 
         Text(
             color = Color.White,
-            fontSize = 24.sp,
+            fontSize = 20.sp,
             text = stringResource(id = textId),
             fontFamily = FontFamily.Default,
             modifier = Modifier
@@ -250,13 +250,17 @@ fun Screen(
             modifier = Modifier
                 .padding(top = 32.dp)
                 .constrainAs(image) {
-                    width = Dimension.fillToConstraints
+                    width = Dimension.wrapContent
                     height = Dimension.fillToConstraints
                     top.linkTo(text.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
+                    if (imageId == R.drawable.img_car1 || imageId == R.drawable.img_car4) {
+                        start.linkTo(parent.start)
+                    } else {
+                        end.linkTo(parent.end)
+                    }
                     bottom.linkTo(button.top)
                 }
+
         )
 
         Column(
